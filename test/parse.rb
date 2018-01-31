@@ -40,6 +40,14 @@ userName eq "bjensen"
 [userName,'"bjensen"',eq]
 [eq, userName,'"bjensen"']
 
+(userName eq "bjensen")
+[userName,'"bjensen"',eq]
+[eq, userName,'"bjensen"']
+
+userName ne "bjensen"
+[userName,'"bjensen"',ne]
+[ne, userName,'"bjensen"']
+
 name.familyName co "O'Malley"
 [name.familyName, '"O''Malley"', co]
 [co, name.familyName, '"O''Malley"']
@@ -79,4 +87,5 @@ title pr or userType eq "Intern"
 userType eq "Employee" and (emails co "example.com" or emails co "example.org")
 [userType, '"Employee"', eq, emails, '"example.com"', co, emails, '"example.org"', co, or ,and]
 [and, [eq, userType, '"Employee"'], [or, [co, emails, '"example.com"'], [co, emails, '"example.org"']]]
+
 ...

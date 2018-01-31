@@ -7,6 +7,7 @@ class SCIM::Query::Filter::Parser
   # Operator Precedence:
   Ops = {
     'pr' => 4,
+    'ne' => 3,
     'eq' => 3,
     'co' => 3,
     'sw' => 3,
