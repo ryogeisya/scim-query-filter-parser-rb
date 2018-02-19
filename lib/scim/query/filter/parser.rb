@@ -1,4 +1,16 @@
-class SCIM; class Query; class Filter; class Parser; end; end; end; end
+class SCIM;
+  class Query
+    class Filter
+      class Parser
+        class << self
+          def ucc(str, sep=/[^[:alnum:]]+/)
+            str.split(sep).map(&:capitalize).join
+          end
+        end
+      end
+    end
+  end
+end
 
 class SCIM::Query::Filter::Parser
   attr_accessor :rpn
@@ -25,11 +37,12 @@ class SCIM::Query::Filter::Parser
   # Tokenizing regexen:
   Paren = /[\(\)]/
   Str = /"(?:\\"|[^"])*"/
-  Op = /#{Ops.keys.join'|'}/
+  Op = /#{Ops.keys.map{|k| [k, ::SCIM::Query::Filter::Parser.ucc(k)] }.flatten(1).join'|'}/
   Word = /[\w\.]+/
   Sep = /\s?/
   NextToken = /^(#{Paren}|#{Str}|#{Op}|#{Word})#{Sep}/
   IsOperator = /^(?:#{Op})$/
+
 
   #----------------------------------------------------------------------------
   # Parse SCIM filter query into RPN stack:
@@ -78,8 +91,9 @@ class SCIM::Query::Filter::Parser
     out.push ast.shift if not ast.empty?
     while not ast.empty? do
       op = ast.shift
-      p = Ops[op] \
-        or fail "Unknown operator '#{op}'"
+      op = op.downcase unless op.nil?
+      p = Ops[op] or fail "Unknown operator '#{op}'"
+
       while not ops.empty? do
         break if p > Ops[ops.first]
         out.push ops.shift

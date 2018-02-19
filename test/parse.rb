@@ -40,6 +40,10 @@ userName eq "bjensen"
 [userName,'"bjensen"',eq]
 [eq, userName,'"bjensen"']
 
+userName Eq "bjensen"
+[userName,'"bjensen"',eq]
+[eq, userName,'"bjensen"']
+
 (userName eq "bjensen")
 [userName,'"bjensen"',eq]
 [eq, userName,'"bjensen"']
@@ -48,7 +52,15 @@ userName ne "bjensen"
 [userName,'"bjensen"',ne]
 [ne, userName,'"bjensen"']
 
+userName Ne "bjensen"
+[userName,'"bjensen"',ne]
+[ne, userName,'"bjensen"']
+
 name.familyName co "O'Malley"
+[name.familyName, '"O''Malley"', co]
+[co, name.familyName, '"O''Malley"']
+
+name.familyName Co "O'Malley"
 [name.familyName, '"O''Malley"', co]
 [co, name.familyName, '"O''Malley"']
 
@@ -57,6 +69,10 @@ userName sw "J"
 [sw, userName, '"J"']
 
 title pr
+[title, pr]
+[pr, title]
+
+title Pr
 [title, pr]
 [pr, title]
 
